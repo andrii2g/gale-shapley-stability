@@ -33,6 +33,23 @@ achievable partners among the stable matchings.
 `check` reports the pairs that would both prefer each other to their assigned
 partners. In the supplied unstable matching, A–X and A–Y both block.
 
+### B displaces C
+
+In round 2 of the left-proposing run, Y receives B's proposal and prefers B to
+its tentative partner C. C returns to the queue and proposes to Z in round 3.
+
+![Round 2: Y holds B's proposal and releases C](docs/images/side-switch-displacement.svg)
+
+### Final matchings
+
+**Left side proposes**
+
+![Left-proposing final matching: A–X, B–Y, C–Z](docs/images/side-switch-left-final.svg)
+
+**Right side proposes**
+
+![Right-proposing final matching: A–Y, B–Z, C–X](docs/images/side-switch-right-final.svg)
+
 ## Input
 
 Use a UTF-8 profile with one `[left]` section and one `[right]` section.

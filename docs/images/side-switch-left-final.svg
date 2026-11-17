@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="310" viewBox="0 0 920 310" role="img" aria-labelledby="title description">
+  <title id="title">Final matching</title>
+  <desc id="description">The left side proposes. The algorithm finished after 3 rounds. A is paired with X. B is paired with Y. C is paired with Z.</desc>
+  <style>
+    text { fill: #16263f; font-family: system-ui, sans-serif; }
+    .heading { font-size: 24px; font-weight: 700; }
+    .caption { font-size: 15px; }
+    .group { fill: #465875; font-size: 13px; font-weight: 700; }
+    .name { font: 15px ui-monospace, monospace; }
+    .legend { font-size: 13px; }
+    .held, .accepted, .rejected, .displaced { fill: none; stroke-linecap: round; }
+    .held { stroke: #526681; stroke-width: 2; }
+    .accepted { stroke: #047857; stroke-width: 5; }
+    .rejected { stroke: #b91c1c; stroke-width: 4; stroke-dasharray: 10 6; }
+    .displaced { stroke: #925302; stroke-width: 4; stroke-dasharray: 1 7; }
+  </style>
+  <rect width="920" height="310" rx="12" fill="#f8fafc" />
+  <text class="heading" x="32" y="40">Final matching</text>
+  <text class="caption" x="32" y="70">3 matched pairs · 3 rounds</text>
+  <text class="group" x="236" y="103" text-anchor="end">Left · proposers</text>
+  <text class="group" x="684" y="103" text-anchor="start">Right · receivers</text>
+  <line class="held" x1="250" y1="132" x2="670" y2="132" />
+  <line class="held" x1="250" y1="176" x2="670" y2="176" />
+  <line class="held" x1="250" y1="220" x2="670" y2="220" />
+  <g>
+    <title>A</title>
+    <circle cx="250" cy="132" r="5" fill="#fff" stroke="#16263f" stroke-width="2" />
+    <text class="name" x="236" y="137" text-anchor="end">A</text>
+  </g>
+  <g>
+    <title>B</title>
+    <circle cx="250" cy="176" r="5" fill="#fff" stroke="#16263f" stroke-width="2" />
+    <text class="name" x="236" y="181" text-anchor="end">B</text>
+  </g>
+  <g>
+    <title>C</title>
+    <circle cx="250" cy="220" r="5" fill="#fff" stroke="#16263f" stroke-width="2" />
+    <text class="name" x="236" y="225" text-anchor="end">C</text>
+  </g>
+  <g>
+    <title>X</title>
+    <circle cx="670" cy="132" r="5" fill="#fff" stroke="#16263f" stroke-width="2" />
+    <text class="name" x="684" y="137" text-anchor="start">X</text>
+  </g>
+  <g>
+    <title>Y</title>
+    <circle cx="670" cy="176" r="5" fill="#fff" stroke="#16263f" stroke-width="2" />
+    <text class="name" x="684" y="181" text-anchor="start">Y</text>
+  </g>
+  <g>
+    <title>Z</title>
+    <circle cx="670" cy="220" r="5" fill="#fff" stroke="#16263f" stroke-width="2" />
+    <text class="name" x="684" y="225" text-anchor="start">Z</text>
+  </g>
+  <line class="held" x1="32" y1="286" x2="68" y2="286" />
+  <text class="legend" x="78" y="290">Tentative match</text>
+  <line class="accepted" x1="220" y1="286" x2="256" y2="286" />
+  <text class="legend" x="266" y="290">Accepted proposal</text>
+  <line class="rejected" x1="428" y1="286" x2="464" y2="286" />
+  <text class="legend" x="474" y="290">Rejected proposal</text>
+  <line class="displaced" x1="620" y1="286" x2="656" y2="286" />
+  <text class="legend" x="666" y="290">Displaced match</text>
+</svg>
