@@ -2,7 +2,7 @@ mod input;
 
 use gale_shapley_stability::{
     MAX_EXHAUSTIVE_SIZE, Outcome, Profile, Run, Side, blocking_pairs, solve, verify_exhaustively,
-    write_svg_frames,
+    write_animated_svg, write_svg_frames,
 };
 use std::env;
 use std::fs;
@@ -11,7 +11,8 @@ use std::process::ExitCode;
 use std::time::{Duration, Instant};
 
 const USAGE: &str = "Usage:
-  gale-shapley-stability solve <profile> [--proposers left|right|both] [--summary] [--svg-dir <directory>]
+  gale-shapley-stability solve <profile> [--proposers left|right|both] [--summary]
+      [--svg-dir <directory>] [--animated-svg <file>]
   gale-shapley-stability check <profile> <matching>
 
 Solve runs with both sides proposing by default. Check reports blocking pairs
@@ -60,12 +61,14 @@ struct SolveOptions {
     sides: &'static [Side],
     summary: bool,
     svg_directory: Option<PathBuf>,
+    animated_svg: Option<PathBuf>,
 }
 
 fn parse_solve_options(arguments: &[String]) -> Result<SolveOptions, String> {
     let mut sides: &'static [Side] = &[Side::Left, Side::Right];
     let mut summary = false;
     let mut svg_directory = None;
+    let mut animated_svg = None;
     let mut args = arguments.iter().map(String::as_str);
     while let Some(argument) = args.next() {
         match argument {
@@ -76,6 +79,13 @@ fn parse_solve_options(arguments: &[String]) -> Result<SolveOptions, String> {
                     .filter(|directory| !directory.is_empty() && !directory.starts_with("--"))
                     .ok_or("--svg-dir expects a directory")?;
                 svg_directory = Some(PathBuf::from(directory));
+            }
+            "--animated-svg" => {
+                let file = args
+                    .next()
+                    .filter(|file| !file.is_empty() && !file.starts_with("--"))
+                    .ok_or("--animated-svg expects a file")?;
+                animated_svg = Some(PathBuf::from(file));
             }
             "--proposers" => {
                 sides = match args.next() {
@@ -92,6 +102,7 @@ fn parse_solve_options(arguments: &[String]) -> Result<SolveOptions, String> {
         sides,
         summary,
         svg_directory,
+        animated_svg,
     })
 }
 
@@ -104,7 +115,7 @@ fn read_profile(path: &str) -> Result<Profile, String> {
 }
 
 fn solve_profile(profile: &Profile, options: &SolveOptions) -> Result<u8, String> {
-    let mut previous_matching: Option<Vec<usize>> = None;
+    let mut runs: Vec<Run> = Vec::with_capacity(options.sides.len());
     let mut checks_passed = true;
 
     for &side in options.sides {
@@ -137,11 +148,11 @@ fn solve_profile(profile: &Profile, options: &SolveOptions) -> Result<u8, String
         }
         println!();
 
-        if let Some(previous) = &previous_matching {
+        if let Some(previous) = runs.last() {
             let changed = run
                 .matching
                 .iter()
-                .zip(previous)
+                .zip(&previous.matching)
                 .filter(|(a, b)| a != b)
                 .count();
             println!(
@@ -149,7 +160,13 @@ fn solve_profile(profile: &Profile, options: &SolveOptions) -> Result<u8, String
                 profile.len()
             );
         }
-        previous_matching = Some(run.matching);
+        runs.push(run);
+    }
+
+    if let Some(file) = &options.animated_svg {
+        write_animated_svg(file, profile, &runs)
+            .map_err(|error| format!("Animated SVG export to {}: {error}", file.display()))?;
+        println!("Animated SVG: {}", file.display());
     }
 
     Ok(if checks_passed { 0 } else { 3 })

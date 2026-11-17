@@ -43,6 +43,19 @@ Each frame shows the new proposal, its outcome, and the current tentative matche
   <img src="docs/images/side-switch-replay.svg" alt="Proposal replay showing both proposing sides, with a still frame for reduced motion">
 </picture>
 
+From the repository root, generate both runs and compare the result with the
+SVG used above.
+
+```sh
+cargo run --locked -- solve examples/side-switch.txt --proposers both --animated-svg artifacts/side-switch-replay.svg
+git diff --no-index --ignore-cr-at-eol -- docs/images/side-switch-replay.svg artifacts/side-switch-replay.svg
+```
+
+Use `--proposers left` or `--proposers right` for a single-run animation.
+`--animated-svg` can be combined with `--svg-dir` to export both formats in one
+command. Choose a fresh animation path on reruns because the CLI preserves
+existing files.
+
 ### B displaces C
 
 In round 2 of the left-proposing run, Y receives B's proposal and prefers B to
