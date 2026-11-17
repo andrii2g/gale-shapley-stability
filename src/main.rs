@@ -2,14 +2,16 @@ mod input;
 
 use gale_shapley_stability::{
     MAX_EXHAUSTIVE_SIZE, Outcome, Profile, Run, Side, blocking_pairs, solve, verify_exhaustively,
+    write_svg_frames,
 };
 use std::env;
 use std::fs;
+use std::path::PathBuf;
 use std::process::ExitCode;
 use std::time::{Duration, Instant};
 
 const USAGE: &str = "Usage:
-  gale-shapley-stability solve <profile> [--proposers left|right|both] [--summary]
+  gale-shapley-stability solve <profile> [--proposers left|right|both] [--summary] [--svg-dir <directory>]
   gale-shapley-stability check <profile> <matching>
 
 Solve runs with both sides proposing by default. Check reports blocking pairs
@@ -57,15 +59,24 @@ fn run(arguments: &[String]) -> Result<u8, String> {
 struct SolveOptions {
     sides: &'static [Side],
     summary: bool,
+    svg_directory: Option<PathBuf>,
 }
 
 fn parse_solve_options(arguments: &[String]) -> Result<SolveOptions, String> {
     let mut sides: &'static [Side] = &[Side::Left, Side::Right];
     let mut summary = false;
+    let mut svg_directory = None;
     let mut args = arguments.iter().map(String::as_str);
     while let Some(argument) = args.next() {
         match argument {
             "--summary" => summary = true,
+            "--svg-dir" => {
+                let directory = args
+                    .next()
+                    .filter(|directory| !directory.is_empty() && !directory.starts_with("--"))
+                    .ok_or("--svg-dir expects a directory")?;
+                svg_directory = Some(PathBuf::from(directory));
+            }
             "--proposers" => {
                 sides = match args.next() {
                     Some("left") => &[Side::Left],
@@ -77,7 +88,11 @@ fn parse_solve_options(arguments: &[String]) -> Result<SolveOptions, String> {
             _ => return Err(format!("unknown option {argument}")),
         }
     }
-    Ok(SolveOptions { sides, summary })
+    Ok(SolveOptions {
+        sides,
+        summary,
+        svg_directory,
+    })
 }
 
 fn read_text(path: &str) -> Result<String, String> {
@@ -89,7 +104,7 @@ fn read_profile(path: &str) -> Result<Profile, String> {
 }
 
 fn solve_profile(profile: &Profile, options: &SolveOptions) -> Result<u8, String> {
-    let mut previous_matching = None;
+    let mut previous_matching: Option<Vec<usize>> = None;
     let mut checks_passed = true;
 
     for &side in options.sides {
@@ -114,16 +129,27 @@ fn solve_profile(profile: &Profile, options: &SolveOptions) -> Result<u8, String
         } else {
             println!("Exhaustive check: available for up to {MAX_EXHAUSTIVE_SIZE} per side");
         }
+        if let Some(directory) = &options.svg_directory {
+            let directory = directory.join(side.to_string());
+            write_svg_frames(&directory, profile, &run)
+                .map_err(|error| format!("SVG export to {}: {error}", directory.display()))?;
+            println!("SVG frames: {}", directory.display());
+        }
         println!();
 
-        if let Some(previous) = previous_matching.replace(run.matching) {
-            let current = previous_matching.as_ref().expect("latest matching");
-            let changed = previous.iter().zip(current).filter(|(a, b)| a != b).count();
+        if let Some(previous) = &previous_matching {
+            let changed = run
+                .matching
+                .iter()
+                .zip(previous)
+                .filter(|(a, b)| a != b)
+                .count();
             println!(
                 "Switching proposers changed {changed} of {} pairs.",
                 profile.len()
             );
         }
+        previous_matching = Some(run.matching);
     }
 
     Ok(if checks_passed { 0 } else { 3 })

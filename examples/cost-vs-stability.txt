@@ -1,0 +1,10 @@
+# Adding the two ordinal ranks to assign a cost can favor an unstable matching.
+[left]
+A: X Y Z
+B: X Z Y
+C: Z Y X
+
+[right]
+X: C A B
+Y: B A C
+Z: A B C
