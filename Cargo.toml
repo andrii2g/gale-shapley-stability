@@ -1,0 +1,7 @@
+[package]
+name = "gale-shapley-stability"
+version = "0.1.0"
+edition = "2024"
+description = "Trace and verify Gale–Shapley stable matching"
+
+[dependencies]
