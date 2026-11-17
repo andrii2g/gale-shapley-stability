@@ -1,0 +1,10 @@
+# Each list ranks the opposite group from first choice to last.
+[left]
+A: X Y Z
+B: X Y Z
+C: Y Z X
+
+[right]
+X: C A B
+Y: A B C
+Z: A B C
