@@ -33,6 +33,16 @@ achievable partners among the stable matchings.
 `check` reports the pairs that would both prefer each other to their assigned
 partners. In the supplied unstable matching, A–X and A–Y both block.
 
+### Proposal replay
+
+The loop plays the left-proposing run followed by the right-proposing run.
+Each frame shows the new proposal, its outcome, and the current tentative matches.
+
+<picture>
+  <source media="(prefers-reduced-motion: reduce)" srcset="docs/images/side-switch-left-final.svg">
+  <img src="docs/images/side-switch-replay.svg" alt="Proposal replay showing both proposing sides, with a still frame for reduced motion">
+</picture>
+
 ### B displaces C
 
 In round 2 of the left-proposing run, Y receives B's proposal and prefers B to

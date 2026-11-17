@@ -1,0 +1,191 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="310" viewBox="0 0 920 310" role="img" aria-labelledby="title description">
+  <!-- Composed from the Rust CLI's SVG frames for examples/side-switch.txt. -->
+  <title id="title">Deferred acceptance replay</title>
+  <desc id="description">Left proposes: A to X held, B to X rejected, C to Y held, B to Y displaces C, C to Z held. Final matching A–X, B–Y, C–Z. Right proposes: X to C held, Y to A held, Z to A rejected, Z to B held. Final matching A–Y, B–Z, C–X.</desc>
+  <style>
+    text { fill: #16263f; font-family: system-ui, sans-serif; }
+    .heading { font-size: 24px; font-weight: 700; }
+    .caption { font-size: 15px; }
+    .group { fill: #465875; font-size: 13px; font-weight: 700; }
+    .name { font: 15px ui-monospace, monospace; }
+    .legend { font-size: 13px; }
+    .held, .accepted, .rejected, .displaced { fill: none; stroke-linecap: round; }
+    .held { stroke: #526681; stroke-width: 2; }
+    .accepted { stroke: #047857; stroke-width: 5; }
+    .rejected { stroke: #b91c1c; stroke-width: 4; stroke-dasharray: 10 6; }
+    .displaced { stroke: #925302; stroke-width: 4; stroke-dasharray: 1 7; }
+  </style>
+  <defs>
+    <g id="participants">
+      <g>
+        <title>A</title>
+        <circle cx="250" cy="132" r="5" fill="#fff" stroke="#16263f" stroke-width="2" />
+        <text class="name" x="236" y="137" text-anchor="end">A</text>
+      </g>
+      <g>
+        <title>B</title>
+        <circle cx="250" cy="176" r="5" fill="#fff" stroke="#16263f" stroke-width="2" />
+        <text class="name" x="236" y="181" text-anchor="end">B</text>
+      </g>
+      <g>
+        <title>C</title>
+        <circle cx="250" cy="220" r="5" fill="#fff" stroke="#16263f" stroke-width="2" />
+        <text class="name" x="236" y="225" text-anchor="end">C</text>
+      </g>
+      <g>
+        <title>X</title>
+        <circle cx="670" cy="132" r="5" fill="#fff" stroke="#16263f" stroke-width="2" />
+        <text class="name" x="684" y="137" text-anchor="start">X</text>
+      </g>
+      <g>
+        <title>Y</title>
+        <circle cx="670" cy="176" r="5" fill="#fff" stroke="#16263f" stroke-width="2" />
+        <text class="name" x="684" y="181" text-anchor="start">Y</text>
+      </g>
+      <g>
+        <title>Z</title>
+        <circle cx="670" cy="220" r="5" fill="#fff" stroke="#16263f" stroke-width="2" />
+        <text class="name" x="684" y="225" text-anchor="start">Z</text>
+      </g>
+    </g>
+    <g id="legend">
+      <line class="held" x1="32" y1="286" x2="68" y2="286" />
+      <text class="legend" x="78" y="290">Tentative match</text>
+      <line class="accepted" x1="220" y1="286" x2="256" y2="286" />
+      <text class="legend" x="266" y="290">Accepted proposal</text>
+      <line class="rejected" x1="428" y1="286" x2="464" y2="286" />
+      <text class="legend" x="474" y="290">Rejected proposal</text>
+      <line class="displaced" x1="620" y1="286" x2="656" y2="286" />
+      <text class="legend" x="666" y="290">Displaced match</text>
+    </g>
+  </defs>
+  <rect width="920" height="310" rx="12" fill="#f8fafc" />
+  <g id="replay">
+    <g id="frame-0" opacity="1">
+      <animate attributeName="opacity" dur="21.5s" repeatCount="indefinite" calcMode="discrete" values="1;0;0" keyTimes="0;0.058139535;1" />
+      <text class="heading" x="32" y="40">Left proposes · Initial state</text>
+      <text class="caption" x="32" y="70">No proposals yet</text>
+      <text class="group" x="236" y="103" text-anchor="end">Left · proposers</text>
+      <text class="group" x="684" y="103" text-anchor="start">Right · receivers</text>
+    </g>
+    <g id="frame-1" opacity="0">
+      <animate attributeName="opacity" dur="21.5s" repeatCount="indefinite" calcMode="discrete" values="0;1;0;0" keyTimes="0;0.058139535;0.127906977;1" />
+      <text class="heading" x="32" y="40">Left proposes · Round 1 · Proposal 1</text>
+      <text class="caption" x="32" y="70">A → X · Held</text>
+      <text class="group" x="236" y="103" text-anchor="end">Left · proposers</text>
+      <text class="group" x="684" y="103" text-anchor="start">Right · receivers</text>
+      <line class="held" x1="250" y1="132" x2="670" y2="132" />
+      <line class="accepted" x1="250" y1="132" x2="670" y2="132" />
+    </g>
+    <g id="frame-2" opacity="0">
+      <animate attributeName="opacity" dur="21.5s" repeatCount="indefinite" calcMode="discrete" values="0;1;0;0" keyTimes="0;0.127906977;0.197674419;1" />
+      <text class="heading" x="32" y="40">Left proposes · Round 1 · Proposal 2</text>
+      <text class="caption" x="32" y="70">B → X · Rejected</text>
+      <text class="group" x="236" y="103" text-anchor="end">Left · proposers</text>
+      <text class="group" x="684" y="103" text-anchor="start">Right · receivers</text>
+      <line class="held" x1="250" y1="132" x2="670" y2="132" />
+      <line class="rejected" x1="250" y1="176" x2="670" y2="132" />
+    </g>
+    <g id="frame-3" opacity="0">
+      <animate attributeName="opacity" dur="21.5s" repeatCount="indefinite" calcMode="discrete" values="0;1;0;0" keyTimes="0;0.197674419;0.267441860;1" />
+      <text class="heading" x="32" y="40">Left proposes · Round 1 · Proposal 3</text>
+      <text class="caption" x="32" y="70">C → Y · Held</text>
+      <text class="group" x="236" y="103" text-anchor="end">Left · proposers</text>
+      <text class="group" x="684" y="103" text-anchor="start">Right · receivers</text>
+      <line class="held" x1="250" y1="132" x2="670" y2="132" />
+      <line class="held" x1="250" y1="220" x2="670" y2="176" />
+      <line class="accepted" x1="250" y1="220" x2="670" y2="176" />
+    </g>
+    <g id="frame-4" opacity="0">
+      <animate attributeName="opacity" dur="21.5s" repeatCount="indefinite" calcMode="discrete" values="0;1;0;0" keyTimes="0;0.267441860;0.337209302;1" />
+      <text class="heading" x="32" y="40">Left proposes · Round 2 · Proposal 4</text>
+      <text class="caption" x="32" y="70">B → Y · Replaced C</text>
+      <text class="group" x="236" y="103" text-anchor="end">Left · proposers</text>
+      <text class="group" x="684" y="103" text-anchor="start">Right · receivers</text>
+      <line class="held" x1="250" y1="132" x2="670" y2="132" />
+      <line class="held" x1="250" y1="176" x2="670" y2="176" />
+      <line class="displaced" x1="250" y1="220" x2="670" y2="176" />
+      <line class="accepted" x1="250" y1="176" x2="670" y2="176" />
+    </g>
+    <g id="frame-5" opacity="0">
+      <animate attributeName="opacity" dur="21.5s" repeatCount="indefinite" calcMode="discrete" values="0;1;0;0" keyTimes="0;0.337209302;0.406976744;1" />
+      <text class="heading" x="32" y="40">Left proposes · Round 3 · Proposal 5</text>
+      <text class="caption" x="32" y="70">C → Z · Held</text>
+      <text class="group" x="236" y="103" text-anchor="end">Left · proposers</text>
+      <text class="group" x="684" y="103" text-anchor="start">Right · receivers</text>
+      <line class="held" x1="250" y1="132" x2="670" y2="132" />
+      <line class="held" x1="250" y1="176" x2="670" y2="176" />
+      <line class="held" x1="250" y1="220" x2="670" y2="220" />
+      <line class="accepted" x1="250" y1="220" x2="670" y2="220" />
+    </g>
+    <g id="frame-6" opacity="0">
+      <animate attributeName="opacity" dur="21.5s" repeatCount="indefinite" calcMode="discrete" values="0;1;0;0" keyTimes="0;0.406976744;0.534883721;1" />
+      <text class="heading" x="32" y="40">Left proposes · Final matching</text>
+      <text class="caption" x="32" y="70">3 matched pairs · 3 rounds</text>
+      <text class="group" x="236" y="103" text-anchor="end">Left · proposers</text>
+      <text class="group" x="684" y="103" text-anchor="start">Right · receivers</text>
+      <line class="held" x1="250" y1="132" x2="670" y2="132" />
+      <line class="held" x1="250" y1="176" x2="670" y2="176" />
+      <line class="held" x1="250" y1="220" x2="670" y2="220" />
+    </g>
+    <g id="frame-7" opacity="0">
+      <animate attributeName="opacity" dur="21.5s" repeatCount="indefinite" calcMode="discrete" values="0;1;0;0" keyTimes="0;0.534883721;0.593023256;1" />
+      <text class="heading" x="32" y="40">Right proposes · Initial state</text>
+      <text class="caption" x="32" y="70">No proposals yet</text>
+      <text class="group" x="236" y="103" text-anchor="end">Left · receivers</text>
+      <text class="group" x="684" y="103" text-anchor="start">Right · proposers</text>
+    </g>
+    <g id="frame-8" opacity="0">
+      <animate attributeName="opacity" dur="21.5s" repeatCount="indefinite" calcMode="discrete" values="0;1;0;0" keyTimes="0;0.593023256;0.662790698;1" />
+      <text class="heading" x="32" y="40">Right proposes · Round 1 · Proposal 1</text>
+      <text class="caption" x="32" y="70">X → C · Held</text>
+      <text class="group" x="236" y="103" text-anchor="end">Left · receivers</text>
+      <text class="group" x="684" y="103" text-anchor="start">Right · proposers</text>
+      <line class="held" x1="250" y1="220" x2="670" y2="132" />
+      <line class="accepted" x1="250" y1="220" x2="670" y2="132" />
+    </g>
+    <g id="frame-9" opacity="0">
+      <animate attributeName="opacity" dur="21.5s" repeatCount="indefinite" calcMode="discrete" values="0;1;0;0" keyTimes="0;0.662790698;0.732558140;1" />
+      <text class="heading" x="32" y="40">Right proposes · Round 1 · Proposal 2</text>
+      <text class="caption" x="32" y="70">Y → A · Held</text>
+      <text class="group" x="236" y="103" text-anchor="end">Left · receivers</text>
+      <text class="group" x="684" y="103" text-anchor="start">Right · proposers</text>
+      <line class="held" x1="250" y1="132" x2="670" y2="176" />
+      <line class="held" x1="250" y1="220" x2="670" y2="132" />
+      <line class="accepted" x1="250" y1="132" x2="670" y2="176" />
+    </g>
+    <g id="frame-10" opacity="0">
+      <animate attributeName="opacity" dur="21.5s" repeatCount="indefinite" calcMode="discrete" values="0;1;0;0" keyTimes="0;0.732558140;0.802325581;1" />
+      <text class="heading" x="32" y="40">Right proposes · Round 1 · Proposal 3</text>
+      <text class="caption" x="32" y="70">Z → A · Rejected</text>
+      <text class="group" x="236" y="103" text-anchor="end">Left · receivers</text>
+      <text class="group" x="684" y="103" text-anchor="start">Right · proposers</text>
+      <line class="held" x1="250" y1="132" x2="670" y2="176" />
+      <line class="held" x1="250" y1="220" x2="670" y2="132" />
+      <line class="rejected" x1="250" y1="132" x2="670" y2="220" />
+    </g>
+    <g id="frame-11" opacity="0">
+      <animate attributeName="opacity" dur="21.5s" repeatCount="indefinite" calcMode="discrete" values="0;1;0;0" keyTimes="0;0.802325581;0.872093023;1" />
+      <text class="heading" x="32" y="40">Right proposes · Round 2 · Proposal 4</text>
+      <text class="caption" x="32" y="70">Z → B · Held</text>
+      <text class="group" x="236" y="103" text-anchor="end">Left · receivers</text>
+      <text class="group" x="684" y="103" text-anchor="start">Right · proposers</text>
+      <line class="held" x1="250" y1="132" x2="670" y2="176" />
+      <line class="held" x1="250" y1="176" x2="670" y2="220" />
+      <line class="held" x1="250" y1="220" x2="670" y2="132" />
+      <line class="accepted" x1="250" y1="176" x2="670" y2="220" />
+    </g>
+    <g id="frame-12" opacity="0">
+      <animate attributeName="opacity" dur="21.5s" repeatCount="indefinite" calcMode="discrete" values="0;1;1" keyTimes="0;0.872093023;1" />
+      <text class="heading" x="32" y="40">Right proposes · Final matching</text>
+      <text class="caption" x="32" y="70">3 matched pairs · 2 rounds</text>
+      <text class="group" x="236" y="103" text-anchor="end">Left · receivers</text>
+      <text class="group" x="684" y="103" text-anchor="start">Right · proposers</text>
+      <line class="held" x1="250" y1="132" x2="670" y2="176" />
+      <line class="held" x1="250" y1="176" x2="670" y2="220" />
+      <line class="held" x1="250" y1="220" x2="670" y2="132" />
+    </g>
+    <use href="#participants" />
+    <use href="#legend" />
+  </g>
+</svg>
